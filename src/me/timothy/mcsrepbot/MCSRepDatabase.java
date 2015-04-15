@@ -47,10 +47,10 @@ public class MCSRepDatabase extends Database {
 	/*
 	 * fullnames
 	 *   id         - int primary key
-	 *   fullname   - varchar(50)
+	 *   fullname   - varchar(50) not null
 	 *   
-	 *   created_at - datetime
-	 *   updated_at - datetime
+	 *   created_at - datetime not null
+	 *   updated_at - datetime not null
 	 */
 
 	@Override
@@ -95,11 +95,11 @@ public class MCSRepDatabase extends Database {
 	/*
 	 * responses
 	 *   id         - int primary key
-	 *   title      - varchar(50) unique
-	 *   body       - text
+	 *   title      - varchar(50) unique not null
+	 *   body       - text not null
 	 *   
-	 *   created_at - datetime
-	 *   updated_at - datetime
+	 *   created_at - datetime not null
+	 *   updated_at - datetime not null
 	 */
 	
 	/**
@@ -148,8 +148,8 @@ public class MCSRepDatabase extends Database {
 	 *   username   - varchar(255) unique
 	 *   rep_url    - text
 	 *   
-	 *   created_at - datetime
-	 *   updated_at - datetime
+	 *   created_at - datetime not null
+	 *   updated_at - datetime not null
 	 */
 	
 	/**
