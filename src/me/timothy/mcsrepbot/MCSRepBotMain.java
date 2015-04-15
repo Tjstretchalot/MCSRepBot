@@ -31,6 +31,11 @@ public class MCSRepBotMain {
 	 */
 	public static final String BOT_AUTHOR = "Tjstretchalot";
 	
+	/**
+	 * The MCSRepBot
+	 */
+	public static Bot mcsRepBot;
+	
 	public static void main(String[] args) {
 		Logger logger = LogManager.getLogger();
 		
@@ -52,7 +57,7 @@ public class MCSRepBotMain {
 						config.getProperty("database.password"));
 		
 		logger.debug("Connecting to reddit..");
-		Bot mcsRepBot = new Bot(config.getList("subreddits").stream().collect(Collectors.joining("+")));
+		mcsRepBot = new Bot(config.getList("subreddits").stream().collect(Collectors.joining("+")));
 		
 		BotDriver botDriver = new BotDriver(database, config, mcsRepBot,
 				new CommentSummon[]{}, new PMSummon[]{}, new LinkSummon[]{});

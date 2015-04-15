@@ -154,10 +154,11 @@ public class MCSRepDatabase extends Database {
 	
 	/**
 	 * Finds the user in the database with the username exactly
-	 * matching the specified username.
+	 * matching the specified username. If it does not exist, a
+	 * new one is created.
 	 * 
 	 * @param username the username to search for
-	 * @return the user or null
+	 * @return the user if it exists, otherwise a new one that was created and saved
 	 */
 	public MCSUser getUserByUsername(String username) {
 		try {
@@ -168,6 +169,12 @@ public class MCSRepDatabase extends Database {
 			MCSUser result = (results.first() ? getUserFromSet(results) : null);
 			results.close();
 			statement.close();
+			
+			if(result == null) {
+				long time = System.currentTimeMillis();
+				result = new MCSUser(-1, username, null, new Timestamp(time), new Timestamp(time));
+				updateOrSaveMCSUser(result);
+			}
 			return result;
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
