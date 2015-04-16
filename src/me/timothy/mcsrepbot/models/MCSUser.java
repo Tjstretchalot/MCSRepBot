@@ -47,6 +47,6 @@ public class MCSUser {
 	 * @return if this is maybe valid
 	 */
 	public boolean isValid() {
-		return (id != 0) && (username != null) && (repURL != null) && (createdAt != null) && (updatedAt != null);
+		return (id != 0) && (username != null) && (createdAt != null) && (updatedAt != null);
 	}
 }

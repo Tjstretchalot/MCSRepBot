@@ -131,7 +131,7 @@ public class MCSRepDatabase extends Database {
 	 * @return the response object
 	 */
 	private Response getResponseFromSet(ResultSet results) throws SQLException {
-		return new Response(results.getInt("id"), results.getString("title"), results.getString("text"),
+		return new Response(results.getInt("id"), results.getString("title"), results.getString("body"),
 							results.getTimestamp("created_at"), results.getTimestamp("updated_at"));
 	}
 	

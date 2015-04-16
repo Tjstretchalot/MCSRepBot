@@ -40,7 +40,9 @@ public class MCSRepFetcher {
 			Listing listing = new Listing((JSONObject) result);
 			user.setModhash(listing.modhash());
 			
-			if(listing.numChildren() != 1) {
+			if(listing.numChildren() == 0) {
+				return null;
+			}else if(listing.numChildren() > 1) {
 				logger.info(String.format("Got multiple threads for user %s, choosing most recent", username));
 			}
 			

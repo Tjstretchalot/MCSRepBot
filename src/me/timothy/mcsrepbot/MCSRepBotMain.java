@@ -10,6 +10,7 @@ import me.timothy.bots.summon.CommentSummon;
 import me.timothy.bots.summon.LinkSummon;
 import me.timothy.bots.summon.PMSummon;
 import me.timothy.jreddit.requests.Utils;
+import me.timothy.mcsrepbot.summons.CheckSummon;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,6 +46,8 @@ public class MCSRepBotMain {
 		FileConfiguration config = new FileConfiguration();
 		try {
 			config.addProperties("database", true, "username", "password", "url");
+			config.addProperties("user", true, "username", "password");
+			config.addList("banned", true);
 			config.addList("subreddits", true);
 		} catch (NullPointerException | IOException e) {
 			logger.throwing(e);
@@ -57,10 +60,12 @@ public class MCSRepBotMain {
 						config.getProperty("database.password"));
 		
 		logger.debug("Connecting to reddit..");
-		mcsRepBot = new Bot(config.getList("subreddits").stream().collect(Collectors.joining("+")));
+		String subreddits = config.getList("subreddits").stream().collect(Collectors.joining("+"));
+		logger.debug("Subreddits: " + subreddits);
+		mcsRepBot = new Bot(subreddits);
 		
-		BotDriver botDriver = new BotDriver(database, config, mcsRepBot,
-				new CommentSummon[]{}, new PMSummon[]{}, new LinkSummon[]{});
+		BotDriver botDriver = new MCSRepBotDriver(database, config, mcsRepBot,
+				new CommentSummon[]{}, new PMSummon[]{}, new LinkSummon[]{new CheckSummon()});
 		
 		while(true) {
 			try {
